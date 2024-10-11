@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Custom Manifest PWA</title>
+    <meta name="manifest-storage-key" content="manifestText" />
     <link rel="icon" href="CustomBlack.png">
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
@@ -10,22 +11,25 @@
   <div>
       <h1>Welcome to the Custom Manifest PWA</h1>
       <p>
-        This app uses an inlined web manifest stored in local storage to allow easily customizing any aspect of the manifest, as well as exposing different versions to different users/profiles/browsers.
-        At page load time the inline web manifest and field below are both updated to show the 'current' version of the manifest as far as this user is concerned.
-        To update this 'current' version simply modify the field below and invoke the 'Update' button, which will update the value and reload the page (refreshing the inline web manifest).
-        From there you can use any of the browser-provided installations methods to install the PWA.
+        A test site where you can dynamically change the manifest!
       </p>
-      <p>
-        If you choose to update the manifest please note that paths need to be fully qualified.
-        If you would like to replace an image reference, CustomBlack.png, CustomBlue.png, CustomGreen.png, and CustomOrange.png are all available at the same location for easy reference.
-        If you encounter any problems please see the Console first (including Debug level), as the backing scripts may be already logging answers for you.
-      </p>
-      <p>tl;dr; Update the manifest below (if desired), press 'Update', use your browser to install.</p>
+      <h3>Notes</h3>
+      <ul>
+        <li>Paths must be fully qualified.</li>
+        <li>Some values (e.g. 'name') must be URL encoded.</li>
+        <li>Usage information (e.g. activations) is logged to the Console. (Including the Debug level).</li>
+      </ul>
+      <h3>Resources</h3>
+      <ul>
+        <li><a href="plain-page.html">A plain page</a></li>
+        <li><a href="subpath/index.html">A sub-page with a custom manifest</a></li>
+        <li>Images include <code>CustomBlack.png</code>, <code>CustomBlue.png</code>, <code>CustomGreen.png</code>, and <code>CustomOrange.png</code>.</li>
+      </ul>
+      <h3>Manifest:</h3>
       <div>
-        <button id="update">Update</button>
+        <button id="update">Save</button>
         <button id="reset">Reset to default</button>
       </div>
-      <a href="new-page.html">A sub-page</a>
   </div>
   <textarea id="manifestText"></textarea>
 </body>

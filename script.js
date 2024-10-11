@@ -1,4 +1,8 @@
-﻿function setDefaultManifest() {
+﻿function storageKey() {
+    return document.querySelector("meta[name=manifest-storage-key]").content;
+}
+
+function setDefaultManifest() {
     var defaultManifest = {
       "name": "Custom Profile PWA",
       "short_name": "Custom Profile PWA",
@@ -63,13 +67,13 @@
         }
       ]
     };
-    localStorage.setItem('manifestText', JSON.stringify(defaultManifest, null, " "));
+    localStorage.setItem(storageKey(), JSON.stringify(defaultManifest, null, " "));
 }
 
 document.addEventListener('DOMContentLoaded', ()=> {
     // Hook up the buttons
     document.getElementById("update").addEventListener("click", () => {
-        localStorage.setItem('manifestText', document.getElementById("manifestText").value);
+        localStorage.setItem(storageKey(), document.getElementById("manifestText").value);
         location.reload();
     });
     document.getElementById("reset").addEventListener("click", () => {
@@ -78,8 +82,8 @@ document.addEventListener('DOMContentLoaded', ()=> {
     });
     
     // Add the manifest early so it is noticed automatically
-    document.head.innerHTML += "<link rel='manifest' href='data:application/manifest+json," + localStorage.getItem('manifestText').replaceAll("'", "&apos;")  + "'>";
-    document.getElementById("manifestText").value = localStorage.getItem('manifestText');
+    document.head.innerHTML += "<link rel='manifest' href='data:application/manifest+json," + localStorage.getItem(storageKey()).replaceAll("'", "&apos;")  + "'>";
+    document.getElementById("manifestText").value = localStorage.getItem(storageKey());
 
     // Register the service worker
     if ('serviceWorker' in navigator) { 
@@ -93,7 +97,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
 })
 
 // Establish the default manifest value to use, if not already defined
-if (!localStorage.getItem('manifestText')) {
+if (!localStorage.getItem(storageKey())) {
     setDefaultManifest();
 }
 
